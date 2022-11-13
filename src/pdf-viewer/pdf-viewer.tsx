@@ -13,25 +13,14 @@ import { SyntheticEvent, useState } from "react";
 import "./pdf-viewer.less";
 
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
+import { StandardTemplate } from "../templates/standard-template";
+import { Button, Pagination, PaginationProps } from "antd";
 pdfjs.GlobalWorkerOptions.workerSrc = url;
-
-const document = (
-  <PdfDocument>
-    <PdfPage size="A4">
-      <Text>
-        hellol{" "}
-        <Link src="https://www.google.com">
-          <Text>Section #1 helol</Text>
-        </Link>
-      </Text>
-    </PdfPage>
-  </PdfDocument>
-);
 
 type PdfViewerProps = {};
 
 export function PdfViewer(props: PdfViewerProps) {
-  const value = document;
+  const value = <StandardTemplate />;
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
 
@@ -57,21 +46,37 @@ export function PdfViewer(props: PdfViewerProps) {
     }
   };
 
+  const handlePageChange: PaginationProps["onChange"] = (page) => {
+    setPageNumber(page);
+  };
+
   return (
-    <div className="viewer">
-      <div className="viewer__document-wrapper" onClick={openLinkInNewTab}>
-        {render.value && (
-          <Document file={render.value} onLoadSuccess={onDocumentLoadSuccess}>
-            <Page
-              width={2000}
-              onGetAnnotationsSuccess={(annotations) => {
-                console.log(annotations);
-              }}
-              renderTextLayer={false}
-              pageNumber={pageNumber}
-            />
-          </Document>
-        )}
+    <div className="wrapper">
+      <div className="viewer">
+        <div className="viewer__document-wrapper" onClick={openLinkInNewTab}>
+          {render.value && (
+            <Document file={render.value} onLoadSuccess={onDocumentLoadSuccess}>
+              <Page
+                width={2000}
+                onGetAnnotationsSuccess={(annotations) => {
+                  console.log(annotations);
+                }}
+                renderTextLayer={false}
+                pageNumber={pageNumber}
+              />
+            </Document>
+          )}
+        </div>
+      </div>
+      <div className="viewer__bottom-bar">
+        <Pagination
+          current={pageNumber}
+          defaultCurrent={1}
+          total={numPages ?? 1}
+          pageSize={1}
+          hideOnSinglePage
+          onChange={handlePageChange}
+        />
       </div>
     </div>
   );

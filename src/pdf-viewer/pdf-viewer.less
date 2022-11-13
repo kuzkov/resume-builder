@@ -1,7 +1,13 @@
-.viewer {
-  flex: 1;
+.wrapper {
+  position: relative;
   width: 100%;
   height: 100%;
+}
+
+.viewer {
+  width: 100%;
+  height: 100%;
+  flex: 1;
   display: flex;
   overflow: auto;
   padding: 2rem 3rem;
@@ -32,5 +38,16 @@
         }
       }
     }
+  }
+
+  &__bottom-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem 0.5rem;
   }
 }
