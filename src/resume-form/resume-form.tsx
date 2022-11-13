@@ -1,15 +1,45 @@
-import { FileOutlined } from "@ant-design/icons";
-import { Button } from "antd";
+import {
+  ArrowDownOutlined,
+  CaretDownFilled,
+  CaretDownOutlined,
+  CaretUpFilled,
+  DownOutlined,
+  FileOutlined,
+  InboxOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
+import { Button, Col, Form, Grid, Input, Row, Typography, Upload } from "antd";
+import { useEffect, useState } from "react";
+import { Controller, FormProvider, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { AvatarUploadButton } from "./controls/avatar-upload-button/avatar-upload-button";
 import "./resume-form.less";
+import {
+  PersonalDetails,
+  PersonalDetailsValues,
+  personalDetailsName,
+  personalDetailsDefaultValues,
+} from "./subforms";
 
-export type ResumeFormProps = {};
+type FormValues = {
+  [personalDetailsName]: PersonalDetailsValues;
+};
 
-export const ResumeForm = (props: ResumeFormProps) => {
+const defaultValues: FormValues = {
+  personalDetails: personalDetailsDefaultValues,
+};
+
+export const ResumeForm = () => {
+  const methods = useForm<FormValues>({ defaultValues });
+
   return (
-    <div className="resume-form">
-      <div className="resume-form__fab-wrapper">
-        <Link to="/app/preview">
+    <FormProvider {...methods}>
+      <div className="resume-form">
+        <Form layout="vertical" autoComplete="off">
+          <PersonalDetails />
+        </Form>
+
+        <Link to="/app/preview" className="resume-form__fab">
           <Button
             type="primary"
             size="large"
@@ -21,6 +51,6 @@ export const ResumeForm = (props: ResumeFormProps) => {
           </Button>
         </Link>
       </div>
-    </div>
+    </FormProvider>
   );
 };
