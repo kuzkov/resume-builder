@@ -19,14 +19,20 @@ import {
   PersonalDetailsValues,
   personalDetailsName,
   personalDetailsDefaultValues,
+  EmploymentHistory,
+  employmentHistoryName,
+  EmploymentHistoryValues,
+  employmentHistoryDefaultValues,
 } from "./subforms";
 
 type FormValues = {
   [personalDetailsName]: PersonalDetailsValues;
+  [employmentHistoryName]: EmploymentHistoryValues;
 };
 
 const defaultValues: FormValues = {
-  personalDetails: personalDetailsDefaultValues,
+  [personalDetailsName]: personalDetailsDefaultValues,
+  [employmentHistoryName]: employmentHistoryDefaultValues,
 };
 
 export const ResumeForm = () => {
@@ -34,12 +40,13 @@ export const ResumeForm = () => {
 
   return (
     <FormProvider {...methods}>
-      <div className="resume-form">
+      <div className="rb-resume-form">
         <Form layout="vertical" autoComplete="off">
           <PersonalDetails />
+          <EmploymentHistory />
         </Form>
 
-        <Link to="/app/preview" className="resume-form__fab">
+        <Link to="/app/preview" className="rb-resume-form__fab">
           <Button
             type="primary"
             size="large"

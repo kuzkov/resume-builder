@@ -1,20 +1,14 @@
-import {
-  pdf,
-  Text,
-  Document as PdfDocument,
-  Page as PdfPage,
-  Link,
-} from "@react-pdf/renderer";
+import { pdf } from "@react-pdf/renderer";
 import { Document, Page } from "react-pdf";
 import { useAsync } from "react-use";
 import { pdfjs } from "react-pdf";
 import url from "pdfjs-dist/build/pdf.worker.js";
 import { SyntheticEvent, useState } from "react";
 import "./pdf-viewer.less";
-
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import { StandardTemplate } from "../templates/standard-template";
-import { Button, Pagination, PaginationProps } from "antd";
+import { Pagination, PaginationProps } from "antd";
+
 pdfjs.GlobalWorkerOptions.workerSrc = url;
 
 type PdfViewerProps = {};
@@ -51,9 +45,9 @@ export function PdfViewer(props: PdfViewerProps) {
   };
 
   return (
-    <div className="wrapper">
-      <div className="viewer">
-        <div className="viewer__document-wrapper" onClick={openLinkInNewTab}>
+    <div className="rb-wrapper">
+      <div className="rb-viewer">
+        <div className="rb-viewer__document-wrapper" onClick={openLinkInNewTab}>
           {render.value && (
             <Document file={render.value} onLoadSuccess={onDocumentLoadSuccess}>
               <Page
@@ -68,7 +62,7 @@ export function PdfViewer(props: PdfViewerProps) {
           )}
         </div>
       </div>
-      <div className="viewer__bottom-bar">
+      <div className="rb-viewer__bottom-bar">
         <Pagination
           current={pageNumber}
           defaultCurrent={1}

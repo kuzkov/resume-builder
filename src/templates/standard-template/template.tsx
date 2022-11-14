@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   },
   leftSide: {
     flexBasis: "72%",
-    marginRight: 8,
+    marginRight: 24,
   },
   rightSide: {
     flexBasis: "28%",

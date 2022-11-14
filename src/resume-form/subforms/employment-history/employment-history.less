@@ -1,0 +1,21 @@
+@import "~antd/es/style/themes/default.less";
+
+.rb-employment {
+  & &__panel {
+    padding: 0 8px;
+  }
+
+  & &__add-more-button {
+    text-align: left;
+    color: @primary-color;
+
+    &:active {
+      color: @primary-color-active;
+    }
+
+    &:hover {
+      color: @primary-color-hover;
+      background-color: fade(@primary-color, 5%);
+    }
+  }
+}

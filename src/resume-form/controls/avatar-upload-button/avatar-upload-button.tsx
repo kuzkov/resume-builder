@@ -60,7 +60,7 @@ export const AvatarUploadButton = () => {
   };
 
   const uploadButton = (
-    <div className="upload__button">
+    <div className="rb-upload__button">
       <UserOutlined />
       <div style={{ marginLeft: 8 }}>Upload</div>
     </div>
@@ -71,7 +71,7 @@ export const AvatarUploadButton = () => {
       <ImgCrop rotate>
         <Upload
           name="avatar"
-          className="upload"
+          className="rb-upload"
           customRequest={handleUpload}
           listType="picture-card"
           fileList={fileList}
