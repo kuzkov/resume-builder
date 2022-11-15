@@ -1,7 +1,13 @@
 import { PlusOutlined } from "@ant-design/icons";
 import { Collapse, Typography } from "antd";
-import { useId } from "react";
-import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
+import { useCallback, useId } from "react";
+import {
+  DragDropContext,
+  DragStart,
+  DragUpdate,
+  Droppable,
+  DropResult,
+} from "react-beautiful-dnd";
 import { useFieldArray, useFormContext, useWatch } from "react-hook-form";
 import { GhostButton } from "../../controls/ghost-button/ghost-button";
 import { FormValues } from "../../default-form-values";
@@ -10,12 +16,8 @@ import { EmploymentCollapse } from "./employment-collapse/employment-collapse";
 
 export const EmploymentHistory = () => {
   const droppableId = useId();
-  const { control } = useFormContext<FormValues>();
+  const { control, watch } = useFormContext<FormValues>();
   const { fields, append, move } = useFieldArray({
-    control,
-    name: employmentHistoryName,
-  });
-  const watchedFields = useWatch({
     control,
     name: employmentHistoryName,
   });
@@ -28,11 +30,27 @@ export const EmploymentHistory = () => {
     });
   };
 
-  const handleDragEnd = (result: DropResult) => {
-    if (result.destination) {
-      move(result.source.index, result.destination.index);
-    }
-  };
+  const handleDragEnd = useCallback(
+    (result: DropResult) => {
+      const { destination, source } = result;
+
+      if (!destination) {
+        return;
+      }
+
+      if (
+        destination.droppableId === source.droppableId &&
+        destination.index === source.index
+      ) {
+        return;
+      }
+
+      if (result.destination) {
+        move(result.source.index, result.destination.index);
+      }
+    },
+    [move]
+  );
 
   return (
     <div className="rb-employment" style={{ paddingTop: 64 }}>
@@ -42,12 +60,20 @@ export const EmploymentHistory = () => {
           {(provided) => (
             <div {...provided.droppableProps} ref={provided.innerRef}>
               {fields.length !== 0 &&
-                fields.map(({ id }, index) => (
-                  <EmploymentCollapse
-                    key={id}
-                    {...{ id, index, employment: watchedFields[index] }}
-                  />
-                ))}
+                fields.map(({ id }, index) => {
+                  const employment = watch(employmentHistoryName)[index];
+
+                  return (
+                    <EmploymentCollapse
+                      key={id}
+                      {...{
+                        id,
+                        index,
+                        employment,
+                      }}
+                    />
+                  );
+                })}
               {provided.placeholder}
             </div>
           )}
