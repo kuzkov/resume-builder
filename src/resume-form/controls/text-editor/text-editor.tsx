@@ -83,8 +83,6 @@ const MarkButton = ({ format, icon }: { format: string; icon: ReactNode }) => {
 };
 
 const Leaf = ({ children, leaf, attributes }: RenderLeafProps) => {
-  console.log(leaf);
-
   // @ts-ignore
   if (leaf.bold) {
     children = <strong>{children}</strong>;

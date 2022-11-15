@@ -22,6 +22,7 @@
     "antd-img-crop": "^4.2.8",
     "craco-less": "^2.0.0",
     "react": "^18.2.0",
+    "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.39.3",
     "react-pdf": "^6.0.2",
@@ -63,6 +64,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-beautiful-dnd": "^13.1.2",
     "@types/react-pdf": "^5.7.4"
   }
 }

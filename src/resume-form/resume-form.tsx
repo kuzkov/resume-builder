@@ -5,6 +5,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { defaultValues, FormValues } from "./default-form-values";
 import { PersonalDetails, EmploymentHistory } from "./subforms";
 import "./resume-form.less";
+import { DragDropContext } from "react-beautiful-dnd";
 
 export const ResumeForm = () => {
   const methods = useForm<FormValues>({ defaultValues });
