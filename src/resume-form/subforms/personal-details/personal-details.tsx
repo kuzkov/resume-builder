@@ -1,7 +1,9 @@
 import { CaretDownFilled, CaretUpFilled } from "@ant-design/icons";
-import { Button, Col, Form, Row, Typography } from "antd";
+import { Col, Form, Row, Typography } from "antd";
 import { useState } from "react";
-import { AvatarUploadButton, TextField } from "../../controls";
+import { AvatarUploadButton, TextEditor, TextField } from "../../controls";
+import { GhostButton } from "../../controls/ghost-button/ghost-button";
+import "./personal-details.less";
 
 export const personalDetailsName = "personalDetails";
 
@@ -37,9 +39,9 @@ export const PersonalDetails = () => {
   const [showMore, setShowMore] = useState(false);
 
   return (
-    <div>
+    <div className="rb-personal-details">
       <Typography.Title level={3}>Personal Details</Typography.Title>
-      <Row gutter={16}>
+      <Row gutter={[16, 24]}>
         <Col span={12}>
           <TextField
             name={`${personalDetailsName}.wantedJobTitle`}
@@ -121,20 +123,23 @@ export const PersonalDetails = () => {
               <TextField
                 name={`${personalDetailsName}.dateOfBirth`}
                 label="Date Of Birth"
-                placeholder="01.01.1999"
+                placeholder="27.01.1999"
               />
             </Col>
           </>
         )}
         <Col span={24}>
-          <Button
-            type="link"
-            style={{ padding: 0 }}
+          <GhostButton
+            block
             onClick={() => setShowMore((value) => !value)}
+            className="rb-personal-details__show-more-button"
           >
             {showMore ? "Hide" : "Show"} additional details
             {showMore ? <CaretUpFilled /> : <CaretDownFilled />}
-          </Button>
+          </GhostButton>
+        </Col>
+        <Col span={24}>
+          <TextEditor />
         </Col>
       </Row>
     </div>

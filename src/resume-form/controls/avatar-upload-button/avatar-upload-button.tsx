@@ -55,7 +55,6 @@ export const AvatarUploadButton = () => {
   };
 
   const handleChange: UploadProps["onChange"] = ({ fileList: newFileList }) => {
-    console.log(newFileList);
     return setFileList(newFileList);
   };
 

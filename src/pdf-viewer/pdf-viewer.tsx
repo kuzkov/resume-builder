@@ -52,9 +52,6 @@ export function PdfViewer(props: PdfViewerProps) {
             <Document file={render.value} onLoadSuccess={onDocumentLoadSuccess}>
               <Page
                 width={2000}
-                onGetAnnotationsSuccess={(annotations) => {
-                  console.log(annotations);
-                }}
                 renderTextLayer={false}
                 pageNumber={pageNumber}
               />
