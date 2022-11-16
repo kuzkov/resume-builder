@@ -1,22 +1,16 @@
 import { PlusOutlined } from "@ant-design/icons";
-import { Collapse, Typography } from "antd";
+import { Typography } from "antd";
 import { useCallback, useId } from "react";
-import {
-  DragDropContext,
-  DragStart,
-  DragUpdate,
-  Droppable,
-  DropResult,
-} from "react-beautiful-dnd";
-import { useFieldArray, useFormContext, useWatch } from "react-hook-form";
-import { GhostButton } from "../../controls/ghost-button/ghost-button";
+import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
+import { useFieldArray, useFormContext } from "react-hook-form";
+import { GhostButton } from "../../components/ghost-button/ghost-button";
 import { FormValues } from "../../default-form-values";
 import { employmentHistoryName } from "./default-values";
 import { EmploymentCollapse } from "./employment-collapse/employment-collapse";
 
 export const EmploymentHistory = () => {
   const droppableId = useId();
-  const { control, watch } = useFormContext<FormValues>();
+  const { control } = useFormContext<FormValues>();
   const { fields, append, move } = useFieldArray({
     control,
     name: employmentHistoryName,
@@ -27,6 +21,11 @@ export const EmploymentHistory = () => {
       jobTitle: "",
       employer: "",
       city: "",
+      dateRange: {
+        startDate: null,
+        endDate: null,
+        tillPresent: false,
+      },
     });
   };
 
@@ -60,20 +59,9 @@ export const EmploymentHistory = () => {
           {(provided) => (
             <div {...provided.droppableProps} ref={provided.innerRef}>
               {fields.length !== 0 &&
-                fields.map(({ id }, index) => {
-                  const employment = watch(employmentHistoryName)[index];
-
-                  return (
-                    <EmploymentCollapse
-                      key={id}
-                      {...{
-                        id,
-                        index,
-                        employment,
-                      }}
-                    />
-                  );
-                })}
+                fields.map(({ id }, index) => (
+                  <EmploymentCollapse key={id} {...{ id, index }} />
+                ))}
               {provided.placeholder}
             </div>
           )}

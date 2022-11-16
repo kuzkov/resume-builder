@@ -1,8 +1,11 @@
 const CracoLessPlugin = require("craco-less");
+const AntdDayjsWebpackPlugin = require("antd-dayjs-webpack-plugin");
 
 module.exports = {
   webpack: {
     configure(config) {
+      config.plugins.push(new AntdDayjsWebpackPlugin());
+
       config.module.rules.push({
         test: /pdfjs-dist\/build\/pdf\.worker\.js$/,
         type: "asset/resource",

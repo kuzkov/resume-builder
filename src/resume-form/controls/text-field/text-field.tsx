@@ -9,12 +9,9 @@ export type TextFieldProps = {
 };
 
 export const TextField = ({ name, label, placeholder }: TextFieldProps) => {
-  const { control } = useFormContext<FormValues>();
-
   return (
     <Controller
       name={name}
-      control={control}
       render={({ field: { value, ...field } }) => (
         <Form.Item name={name} label={label}>
           <Input

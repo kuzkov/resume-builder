@@ -1,8 +1,9 @@
 import { CaretDownFilled, CaretUpFilled } from "@ant-design/icons";
 import { Col, Form, Row, Typography } from "antd";
 import { useState } from "react";
-import { AvatarUploadButton, TextEditor, TextField } from "../../controls";
-import { GhostButton } from "../../controls/ghost-button/ghost-button";
+import { TextField } from "../../controls";
+import { AvatarUploadButton, TextEditor } from "../../components";
+import { GhostButton } from "../../components/ghost-button/ghost-button";
 import "./personal-details.less";
 
 export const personalDetailsName = "personalDetails";

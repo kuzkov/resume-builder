@@ -1,4 +1,4 @@
-import { LoadingOutlined, UserOutlined } from "@ant-design/icons";
+import { UserOutlined } from "@ant-design/icons";
 import { message, Modal, Upload } from "antd";
 import { RcFile, UploadFile, UploadProps } from "antd/lib/upload";
 import { useState } from "react";

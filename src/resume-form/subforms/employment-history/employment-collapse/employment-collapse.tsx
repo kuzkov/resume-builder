@@ -1,30 +1,36 @@
 import { HolderOutlined } from "@ant-design/icons";
-import { Button, Col, Collapse, DatePicker, Form, Row, Typography } from "antd";
+import { Button, Col, Collapse, Row, Typography } from "antd";
 import { Draggable } from "react-beautiful-dnd";
-import { TextEditor, TextField } from "../../../controls";
+import { TextField } from "../../../controls";
+import { TextEditor } from "../../../components";
 import { employmentHistoryName } from "../default-values";
+import { DateRangeField } from "../../../controls/date-range-field/date-range-field";
+import cx from "classnames";
 import "./employment-collapse.less";
-
-const { RangePicker } = DatePicker;
+import { useWatch } from "react-hook-form";
 
 export type EmploymentCollapseProps = {
-  id: any;
-  employment: any;
+  id: string;
   index: number;
 };
 
-export const EmploymentCollapse = ({
-  id,
-  index,
-  employment,
-}: EmploymentCollapseProps) => {
+export const EmploymentCollapse = ({ id, index }: EmploymentCollapseProps) => {
+  const employment = useWatch({
+    name: `${employmentHistoryName}.${index}`,
+  });
+
+  console.log(employment);
+
   return (
     <Draggable draggableId={id} index={index}>
-      {(provided) => (
+      {(provided, snapshot) => (
         <div
           {...provided.draggableProps}
           ref={provided.innerRef}
-          className="rb-employment-collapse"
+          className={cx(
+            "rb-employment-collapse",
+            snapshot.isDragging && "rb-employment-collapse--dragging"
+          )}
         >
           <Collapse expandIconPosition="end">
             <Collapse.Panel
@@ -74,13 +80,11 @@ export const EmploymentCollapse = ({
                   />
                 </Col>
                 <Col span={12}>
-                  <Form.Item label="Start & End Date">
-                    <RangePicker
-                      style={{ width: "100%" }}
-                      picker="month"
-                      size="large"
-                    />
-                  </Form.Item>
+                  <DateRangeField
+                    name={`${employmentHistoryName}.${index}.dateRange`}
+                    switchLabel={"I currently work here"}
+                    label={"Start & End Date"}
+                  />
                 </Col>
                 <Col span={12}>
                   <TextField

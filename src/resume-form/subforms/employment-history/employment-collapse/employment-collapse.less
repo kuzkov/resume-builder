@@ -3,6 +3,12 @@
 .rb-employment-collapse {
   position: relative;
   margin-bottom: @margin-sm;
+  transition: box-shadow @animation-duration-slow;
+  box-shadow: 0;
+
+  &--dragging {
+    box-shadow: @box-shadow-base;
+  }
 
   & &__holder {
     opacity: 1;
