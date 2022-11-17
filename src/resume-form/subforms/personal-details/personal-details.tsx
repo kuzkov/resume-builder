@@ -1,8 +1,8 @@
 import { CaretDownFilled, CaretUpFilled } from "@ant-design/icons";
-import { Col, Form, Row, Typography } from "antd";
+import { Col, Row, Typography } from "antd";
 import { useState } from "react";
-import { TextField } from "../../controls";
-import { AvatarUploadButton, TextEditor } from "../../components";
+import { AvatarUploadField, TextField } from "../../controls";
+import { TextEditor } from "../../components";
 import { GhostButton } from "../../components/ghost-button/ghost-button";
 import "./personal-details.less";
 
@@ -10,6 +10,7 @@ export const personalDetailsName = "personalDetails";
 
 export type PersonalDetailsValues = {
   wantedJobTitle: string;
+  avatar?: File;
   firstName: string;
   lastName: string;
   email: string;
@@ -24,6 +25,7 @@ export type PersonalDetailsValues = {
 
 export const personalDetailsDefaultValues: PersonalDetailsValues = {
   wantedJobTitle: "",
+  avatar: undefined,
   firstName: "",
   lastName: "",
   email: "",
@@ -51,9 +53,7 @@ export const PersonalDetails = () => {
           />
         </Col>
         <Col span={12}>
-          <Form.Item>
-            <AvatarUploadButton />
-          </Form.Item>
+          <AvatarUploadField name={`${personalDetailsName}.avatar`} />
         </Col>
         <Col span={12}>
           <TextField

@@ -19,8 +19,6 @@ export const EmploymentCollapse = ({ id, index }: EmploymentCollapseProps) => {
     name: `${employmentHistoryName}.${index}`,
   });
 
-  console.log(employment);
-
   return (
     <Draggable draggableId={id} index={index}>
       {(provided, snapshot) => (

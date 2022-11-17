@@ -28,7 +28,11 @@ const beforeUpload = (file: RcFile) => {
   return isJpgOrPng && isLt2M;
 };
 
-export const AvatarUploadButton = () => {
+export type AvatarUploadButtonProps = {
+  onChange?: (file?: File) => void;
+};
+
+export const AvatarUploadButton = ({ onChange }: AvatarUploadButtonProps) => {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [previewTitle, setPreviewTitle] = useState("");
@@ -55,6 +59,7 @@ export const AvatarUploadButton = () => {
   };
 
   const handleChange: UploadProps["onChange"] = ({ fileList: newFileList }) => {
+    onChange?.(newFileList[0].originFileObj);
     return setFileList(newFileList);
   };
 
