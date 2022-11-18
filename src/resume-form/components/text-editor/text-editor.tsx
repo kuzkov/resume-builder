@@ -21,18 +21,22 @@ import {
 } from "slate-react";
 import "./text-editor.less";
 
-const initialValue = [
+const defaultValue = [
   {
     type: "paragraph",
-    children: [
-      { text: "This is editable " },
-      { text: "rich", bold: true },
-      { text: " text" },
-    ],
+    children: [{ text: "" }],
   },
-] as any;
+];
 
-export const TextEditor = () => {
+export type TextEditorProps = {
+  initialValue?: any;
+  onChange?: (value: any) => void;
+};
+
+export const TextEditor = ({
+  initialValue = defaultValue,
+  onChange,
+}: TextEditorProps) => {
   const [editor] = useState(() => withReact(createEditor()));
   const renderLeaf = useCallback(
     (props: RenderLeafProps) => <Leaf {...props} />,
@@ -41,7 +45,11 @@ export const TextEditor = () => {
 
   return (
     <div className="rb-text-editor">
-      <Slate editor={editor} value={initialValue}>
+      <Slate
+        editor={editor}
+        value={initialValue}
+        onChange={(value) => onChange?.(value)}
+      >
         <div className="rb-text-editor__toolbar">
           <MarkButton format="bold" icon={<BoldOutlined />} />
           <MarkButton format="italic" icon={<ItalicOutlined />} />

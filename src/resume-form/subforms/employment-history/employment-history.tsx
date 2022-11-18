@@ -21,6 +21,7 @@ export const EmploymentHistory = () => {
       jobTitle: "",
       employer: "",
       city: "",
+      description: undefined,
       dateRange: {
         startDate: null,
         endDate: null,

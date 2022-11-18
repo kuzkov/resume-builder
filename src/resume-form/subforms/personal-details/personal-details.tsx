@@ -1,7 +1,7 @@
 import { CaretDownFilled, CaretUpFilled } from "@ant-design/icons";
 import { Col, Row, Typography } from "antd";
 import { useState } from "react";
-import { AvatarUploadField, TextField } from "../../controls";
+import { AvatarUploadField, RichTextField, TextField } from "../../controls";
 import { TextEditor } from "../../components";
 import { GhostButton } from "../../components/ghost-button/ghost-button";
 import "./personal-details.less";
@@ -21,6 +21,7 @@ export type PersonalDetailsValues = {
   address: string;
   dateOfBirth: string;
   nationality: string;
+  description: any;
 };
 
 export const personalDetailsDefaultValues: PersonalDetailsValues = {
@@ -36,6 +37,7 @@ export const personalDetailsDefaultValues: PersonalDetailsValues = {
   nationality: "",
   address: "",
   dateOfBirth: "",
+  description: undefined,
 };
 
 export const PersonalDetails = () => {
@@ -140,7 +142,7 @@ export const PersonalDetails = () => {
           </GhostButton>
         </Col>
         <Col span={24}>
-          <TextEditor />
+          <RichTextField name={`${personalDetailsName}.description`} />
         </Col>
       </Row>
     </div>

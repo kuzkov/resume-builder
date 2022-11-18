@@ -1,13 +1,11 @@
 import { HolderOutlined } from "@ant-design/icons";
 import { Button, Col, Collapse, Row, Typography } from "antd";
 import { Draggable } from "react-beautiful-dnd";
-import { TextField } from "../../../controls";
-import { TextEditor } from "../../../components";
+import { DateRangeField, RichTextField, TextField } from "../../../controls";
 import { employmentHistoryName } from "../default-values";
-import { DateRangeField } from "../../../controls/date-range-field/date-range-field";
+import { useWatch } from "react-hook-form";
 import cx from "classnames";
 import "./employment-collapse.less";
-import { useWatch } from "react-hook-form";
 
 export type EmploymentCollapseProps = {
   id: string;
@@ -65,14 +63,14 @@ export const EmploymentCollapse = ({ id, index }: EmploymentCollapseProps) => {
               <Row gutter={[16, 24]}>
                 <Col span={12}>
                   <TextField
-                    name={`${employmentHistoryName}.${index}.jobTitle` as const}
+                    name={`${employmentHistoryName}.${index}.jobTitle`}
                     placeholder="e. g. Teacher"
                     label="Job Title"
                   />
                 </Col>
                 <Col span={12}>
                   <TextField
-                    name={`${employmentHistoryName}.${index}.employer` as const}
+                    name={`${employmentHistoryName}.${index}.employer`}
                     placeholder="Company Name"
                     label="Employer"
                   />
@@ -86,13 +84,15 @@ export const EmploymentCollapse = ({ id, index }: EmploymentCollapseProps) => {
                 </Col>
                 <Col span={12}>
                   <TextField
-                    name={`${employmentHistoryName}.${index}.city` as const}
+                    name={`${employmentHistoryName}.${index}.city`}
                     placeholder="Minsk"
                     label="City"
                   />
                 </Col>
                 <Col span={24}>
-                  <TextEditor />
+                  <RichTextField
+                    name={`${employmentHistoryName}.${index}.description`}
+                  />
                 </Col>
               </Row>
             </Collapse.Panel>

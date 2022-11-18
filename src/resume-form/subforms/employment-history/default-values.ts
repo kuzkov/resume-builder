@@ -3,6 +3,7 @@ export type EmploymentHistoryValues = Array<{
   jobTitle: string;
   employer: string;
   city: string;
+  description: any;
   dateRange: {
     startDate: Dayjs | null;
     endDate: Dayjs | null;
@@ -12,35 +13,4 @@ export type EmploymentHistoryValues = Array<{
 
 export const employmentHistoryName = "employmentHistory";
 
-export const employmentHistoryDefaultValues = [
-  {
-    jobTitle: "",
-    employer: "",
-    city: "",
-    dateRange: {
-      startDate: null,
-      endDate: null,
-      tillPresent: false,
-    },
-  },
-  {
-    jobTitle: "",
-    employer: "",
-    city: "",
-    dateRange: {
-      startDate: null,
-      endDate: null,
-      tillPresent: false,
-    },
-  },
-  {
-    jobTitle: "",
-    employer: "",
-    city: "",
-    dateRange: {
-      startDate: null,
-      endDate: null,
-      tillPresent: false,
-    },
-  },
-];
+export const employmentHistoryDefaultValues = [];
