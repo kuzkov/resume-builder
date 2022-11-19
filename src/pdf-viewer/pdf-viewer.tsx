@@ -1,6 +1,6 @@
 import { pdf } from "@react-pdf/renderer";
 import { Document, Page } from "react-pdf";
-import { useAsync } from "react-use";
+import { useAsync, useDebounce } from "react-use";
 import { pdfjs } from "react-pdf";
 import url from "pdfjs-dist/build/pdf.worker.js";
 import { SyntheticEvent, useState } from "react";
@@ -8,24 +8,27 @@ import "./pdf-viewer.less";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import { StandardTemplate } from "../templates/standard-template";
 import { Pagination, PaginationProps } from "antd";
+import { useResume } from "../resume-form";
 
 pdfjs.GlobalWorkerOptions.workerSrc = url;
 
 type PdfViewerProps = {};
 
 export function PdfViewer(props: PdfViewerProps) {
-  const value = <StandardTemplate />;
+  const resume = useResume();
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
+  const [url, setUrl] = useState<string>();
 
-  const render = useAsync(async () => {
-    if (!value) return;
-
-    const blob = await pdf(value).toBlob();
-    const url = URL.createObjectURL(blob);
-
-    return url;
-  }, []);
+  useDebounce(
+    async () => {
+      const blob = await pdf(<StandardTemplate />).toBlob();
+      const url = URL.createObjectURL(blob);
+      setUrl(url);
+    },
+    2000,
+    [resume]
+  );
 
   function onDocumentLoadSuccess({ numPages }: any) {
     setNumPages(numPages);
@@ -48,8 +51,8 @@ export function PdfViewer(props: PdfViewerProps) {
     <div className="rb-wrapper">
       <div className="rb-viewer">
         <div className="rb-viewer__document-wrapper" onClick={openLinkInNewTab}>
-          {render.value && (
-            <Document file={render.value} onLoadSuccess={onDocumentLoadSuccess}>
+          {url && (
+            <Document file={url} onLoadSuccess={onDocumentLoadSuccess}>
               <Page
                 width={2000}
                 renderTextLayer={false}
