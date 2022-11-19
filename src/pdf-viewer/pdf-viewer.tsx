@@ -22,7 +22,7 @@ export function PdfViewer(props: PdfViewerProps) {
 
   useDebounce(
     async () => {
-      const blob = await pdf(<StandardTemplate />).toBlob();
+      const blob = await pdf(<StandardTemplate data={resume} />).toBlob();
       const url = URL.createObjectURL(blob);
       setUrl(url);
     },

@@ -4,14 +4,7 @@ import { RcFile, UploadFile, UploadProps } from "antd/lib/upload";
 import { useState } from "react";
 import ImgCrop from "antd-img-crop";
 import "./avatar-upload-button.less";
-
-const getBase64 = (file: RcFile): Promise<string> =>
-  new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result as string);
-    reader.onerror = (error) => reject(error);
-  });
+import { getBase64 } from "../../../utils/get-base64";
 
 const beforeUpload = (file: RcFile) => {
   const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";

@@ -1,4 +1,6 @@
-import { StyleSheet, View } from "@react-pdf/renderer";
+import { Image, StyleSheet, View } from "@react-pdf/renderer";
+import { useResume } from "../../../resume-form";
+import { getBase64 } from "../../../utils/get-base64";
 import { Typography } from "../components";
 
 const styles = StyleSheet.create({
@@ -10,11 +12,12 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 3,
+    marginRight: 12,
+
     // TODO: Change to avatar image
     backgroundColor: "red",
   },
   personSection: {
-    marginLeft: 12,
     display: "flex",
     justifyContent: "center",
   },
@@ -24,14 +27,30 @@ const styles = StyleSheet.create({
 });
 
 export const Header = () => {
+  const resume = useResume();
+
+  if (!resume) {
+    return null;
+  }
+
+  const {
+    personalDetails: { avatar, firstName, lastName, wantedJobTitle },
+  } = resume;
+
   return (
     <View style={styles.header}>
-      <View style={styles.avatar} />
+      {!!avatar && <Image src={getBase64(avatar)} style={styles.avatar} />}
       <View style={styles.personSection}>
-        <Typography.Title>Artyom Kuzkov</Typography.Title>
-        <Typography.Text style={styles.jobTitle}>
-          Frontend Developer
-        </Typography.Text>
+        {(!firstName && !lastName) || (
+          <Typography.Title>
+            {firstName} {lastName}
+          </Typography.Title>
+        )}
+        {!wantedJobTitle || (
+          <Typography.Text style={styles.jobTitle}>
+            {wantedJobTitle}
+          </Typography.Text>
+        )}
       </View>
     </View>
   );

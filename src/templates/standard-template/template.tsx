@@ -1,4 +1,5 @@
 import { Page, Document, View, StyleSheet } from "@react-pdf/renderer";
+import { FormValues, ResumeProvider } from "../../resume-form";
 import { Header, SideNav, Main } from "./sections";
 
 const styles = StyleSheet.create({
@@ -19,22 +20,24 @@ const styles = StyleSheet.create({
   },
 });
 
-export const StandardTemplate = () => {
+export const StandardTemplate = ({ data }: { data: FormValues | null }) => {
   return (
-    <Document>
-      <Page size="A4">
-        <View style={styles.document}>
-          <Header />
-          <View style={styles.main}>
-            <View style={styles.leftSide}>
-              <Main />
-            </View>
-            <View style={styles.rightSide}>
-              <SideNav />
+    <ResumeProvider initialValue={data}>
+      <Document>
+        <Page size="A4">
+          <View style={styles.document}>
+            <Header />
+            <View style={styles.main}>
+              <View style={styles.leftSide}>
+                <Main />
+              </View>
+              <View style={styles.rightSide}>
+                <SideNav />
+              </View>
             </View>
           </View>
-        </View>
-      </Page>
-    </Document>
+        </Page>
+      </Document>
+    </ResumeProvider>
   );
 };
