@@ -1,21 +1,20 @@
-import { ReactNode } from "react";
-import { StyleSheet, Text as BaseText } from "@react-pdf/renderer";
+import { type ReactNode } from 'react';
+import type ReactPDF from '@react-pdf/renderer';
+import { StyleSheet, Text as BaseText } from '@react-pdf/renderer';
 
 export type TextProps = {
-  variant?: "body";
+  variant?: 'body';
   children?: ReactNode;
-  style?: any;
+  style?: ReactPDF.Styles[string];
 };
 
 const textStyles = StyleSheet.create({
   body: {
-    fontFamily: "Helvetica",
+    fontFamily: 'Helvetica',
     fontSize: 10.64,
   },
 });
 
-export const Text = ({ variant = "body", children, style = {} }: TextProps) => {
-  return (
-    <BaseText style={{ ...textStyles[variant], ...style }}>{children}</BaseText>
-  );
-};
+export function Text({ variant = 'body', children, style = {} }: TextProps) {
+  return <BaseText style={{ ...textStyles[variant], ...style }}>{children}</BaseText>;
+}

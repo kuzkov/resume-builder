@@ -1,18 +1,18 @@
-import { pdf } from "@react-pdf/renderer";
-import { Document, Page } from "react-pdf";
-import { useAsync, useDebounce } from "react-use";
-import { pdfjs } from "react-pdf";
-import url from "pdfjs-dist/build/pdf.worker.js";
-import { SyntheticEvent, useState } from "react";
-import "./pdf-viewer.less";
-import "react-pdf/dist/esm/Page/AnnotationLayer.css";
-import { StandardTemplate } from "../templates/standard-template";
-import { Pagination, PaginationProps } from "antd";
-import { useResume } from "../resume-form";
+import { pdf } from '@react-pdf/renderer';
+import { Document, Page } from 'react-pdf';
+import { useAsync, useDebounce } from 'react-use';
+import { pdfjs } from 'react-pdf';
+import url from 'pdfjs-dist/build/pdf.worker.js';
+import { type SyntheticEvent, useState } from 'react';
+import './pdf-viewer.less';
+import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+import { StandardTemplate } from '../templates/standard-template';
+import { Pagination, type PaginationProps } from 'antd';
+import { useResume } from '../resume-form';
 
 pdfjs.GlobalWorkerOptions.workerSrc = url;
 
-type PdfViewerProps = {};
+type PdfViewerProps = Record<string, unknown>;
 
 export function PdfViewer(props: PdfViewerProps) {
   const resume = useResume();
@@ -27,7 +27,7 @@ export function PdfViewer(props: PdfViewerProps) {
       setUrl(url);
     },
     2000,
-    [resume]
+    [resume],
   );
 
   function onDocumentLoadSuccess({ numPages }: any) {
@@ -38,37 +38,33 @@ export function PdfViewer(props: PdfViewerProps) {
     event.preventDefault();
     const target = event.target as HTMLAnchorElement;
 
-    if (target.tagName.toLowerCase() === "a") {
-      window.open(target.href, "_blank");
+    if (target.tagName.toLowerCase() === 'a') {
+      window.open(target.href, '_blank');
     }
   };
 
-  const handlePageChange: PaginationProps["onChange"] = (page) => {
+  const handlePageChange: PaginationProps['onChange'] = (page) => {
     setPageNumber(page);
   };
 
   return (
-    <div className="rb-wrapper">
-      <div className="rb-viewer">
-        <div className="rb-viewer__document-wrapper" onClick={openLinkInNewTab}>
+    <div className='rb-wrapper'>
+      <div className='rb-viewer'>
+        <div className='rb-viewer__document-wrapper' onClick={openLinkInNewTab}>
           {url && (
             <Document file={url} onLoadSuccess={onDocumentLoadSuccess}>
-              <Page
-                width={2000}
-                renderTextLayer={false}
-                pageNumber={pageNumber}
-              />
+              <Page width={2000} renderTextLayer={false} pageNumber={pageNumber} />
             </Document>
           )}
         </div>
       </div>
-      <div className="rb-viewer__bottom-bar">
+      <div className='rb-viewer__bottom-bar'>
         <Pagination
+          hideOnSinglePage
           current={pageNumber}
           defaultCurrent={1}
           total={numPages ?? 1}
           pageSize={1}
-          hideOnSinglePage
           onChange={handlePageChange}
         />
       </div>

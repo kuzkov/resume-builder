@@ -1,15 +1,16 @@
-import { ReactNode } from "react";
-import { StyleSheet, Text as BaseText } from "@react-pdf/renderer";
+import { type ReactNode } from 'react';
+import type ReactPDF from '@react-pdf/renderer';
+import { StyleSheet, Text as BaseText } from '@react-pdf/renderer';
 
 export type TitleProps = {
-  variant?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+  variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
   children?: ReactNode;
-  style?: any;
+  style?: ReactPDF.Styles[string];
 };
 
 const baseStyles = StyleSheet.create({
   base: {
-    fontFamily: "Helvetica-Bold",
+    fontFamily: 'Helvetica-Bold',
   },
 });
 
@@ -27,19 +28,15 @@ const titleStyles = StyleSheet.create({
     fontSize: 10.64,
   },
   h5: {
-    color: "#697283",
+    color: '#697283',
     fontSize: 10.64,
   },
   h6: {
-    color: "#697283",
+    color: '#697283',
     fontSize: 10.64,
   },
 });
 
-export const Title = ({ variant = "h1", children, style = {} }: TitleProps) => {
-  return (
-    <BaseText style={{ ...baseStyles.base, ...titleStyles[variant], ...style }}>
-      {children}
-    </BaseText>
-  );
-};
+export function Title({ variant = 'h1', children, style = {} }: TitleProps) {
+  return <BaseText style={{ ...baseStyles.base, ...titleStyles[variant], ...style }}>{children}</BaseText>;
+}
