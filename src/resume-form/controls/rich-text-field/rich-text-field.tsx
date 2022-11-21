@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Controller, type FieldPath } from 'react-hook-form';
 import { TextEditor } from '../../components';
 import { type FormValues } from '../../default-form-values';

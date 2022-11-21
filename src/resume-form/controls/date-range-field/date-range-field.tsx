@@ -1,9 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { type Dayjs } from 'dayjs';
 import dayjsGenerateConfig from 'rc-picker/lib/generate/dayjs';
 import generatePicker from 'antd/es/date-picker/generatePicker';
 import { Form } from 'antd';
-import { SwitchChangeEventHandler } from 'antd/lib/switch';
-import { useState } from 'react';
 import { Controller, type FieldPath } from 'react-hook-form';
 import { LabeledSwitch } from '../../components';
 import { type FormValues } from '../../default-form-values';

@@ -3,19 +3,19 @@ import { message, Modal, Upload } from 'antd';
 import { type RcFile, type UploadFile, type UploadProps } from 'antd/lib/upload';
 import { useState } from 'react';
 import ImgCrop from 'antd-img-crop';
-import './avatar-upload-button.less';
 import { getBase64 } from '../../../utils/get-base64';
+import './avatar-upload-button.less';
 
 const beforeUpload = (file: RcFile) => {
   const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
 
   if (!isJpgOrPng) {
-    message.error('You can only upload JPG/PNG file!');
+    void message.error('You can only upload JPG/PNG file!');
   }
 
   const isLt2M = file.size / 1024 / 1024 < 2;
   if (!isLt2M) {
-    message.error('Image must smaller than 2MB!');
+    void message.error('Image must smaller than 2MB!');
   }
 
   return isJpgOrPng && isLt2M;
@@ -46,7 +46,7 @@ export function AvatarUploadButton({ onChange }: AvatarUploadButtonProps) {
       file.preview = await getBase64(file.originFileObj!);
     }
 
-    setPreviewImage(file.url || file.preview!);
+    setPreviewImage(file.url ?? file.preview!);
     setPreviewOpen(true);
     setPreviewTitle(file.name || file.url!.substring(file.url!.lastIndexOf('/') + 1));
   };

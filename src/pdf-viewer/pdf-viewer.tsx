@@ -1,6 +1,6 @@
 import { pdf } from '@react-pdf/renderer';
 import { Document, Page } from 'react-pdf';
-import { useAsync, useDebounce } from 'react-use';
+import { useDebounce } from 'react-use';
 import { pdfjs } from 'react-pdf';
 import url from 'pdfjs-dist/build/pdf.worker.js';
 import { type SyntheticEvent, useState } from 'react';
@@ -30,9 +30,9 @@ export function PdfViewer(props: PdfViewerProps) {
     [resume],
   );
 
-  function onDocumentLoadSuccess({ numPages }: any) {
+  const onDocumentLoadSuccess = ({ numPages }: any) => {
     setNumPages(numPages);
-  }
+  };
 
   const openLinkInNewTab = (event: SyntheticEvent) => {
     event.preventDefault();
