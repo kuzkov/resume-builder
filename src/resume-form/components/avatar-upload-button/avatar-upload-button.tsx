@@ -52,7 +52,7 @@ export function AvatarUploadButton({ onChange }: AvatarUploadButtonProps) {
   };
 
   const handleChange: UploadProps['onChange'] = ({ fileList: newFileList }) => {
-    onChange?.(newFileList[0].originFileObj);
+    onChange?.(newFileList[0]?.originFileObj);
     setFileList(newFileList);
   };
 
