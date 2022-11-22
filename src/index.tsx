@@ -1,19 +1,17 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
-import reportWebVitals from "./report-web-vitals";
-import App from "./app";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import reportWebVitals from './report-web-vitals';
+import App from './app';
 
-const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
-);
+const root = ReactDOM.createRoot(document.getElementById('root')!);
 
 // Strict mode is disabled due to problems with third party libraries
 // in particular with react-beautiful-dnd
 root.render(
   <BrowserRouter>
     <App />
-  </BrowserRouter>
+  </BrowserRouter>,
 );
 
 // If you want to start measuring performance in your app, pass a function

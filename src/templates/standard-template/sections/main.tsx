@@ -1,8 +1,8 @@
-import { View } from "@react-pdf/renderer";
-import { useResume } from "../../../resume-form";
-import { Typography } from "../components";
+import { View } from '@react-pdf/renderer';
+import { useResume } from '../../../resume-form';
+import { Typography } from '../components';
 
-export const Main = () => {
+export function Main() {
   const resume = useResume();
 
   if (!resume) {
@@ -13,24 +13,23 @@ export const Main = () => {
 
   return (
     <View>
-      {employmentHistory.map(({ jobTitle, employer }, index) => (
-        <View key={index}>
+      {employmentHistory.map(({ jobTitle, employer }) => (
+        <View key={jobTitle + employer}>
           {!jobTitle || (
-            <Typography.Title variant="h2">
+            <Typography.Title variant='h2'>
               {jobTitle}
-              {jobTitle && employer && ", "}
+              {jobTitle && employer && ', '}
               {employer}
             </Typography.Title>
           )}
 
-          <Typography.Text variant="body">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia
-            quia, atque odit ad cumque exercitationem molestias iusto, facere
-            cupiditate modi maiores maxime quibusdam quo provident perspiciatis,
-            voluptas temporibus corrupti adipisci?
+          <Typography.Text variant='body'>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia quia, atque odit ad cumque exercitationem
+            molestias iusto, facere cupiditate modi maiores maxime quibusdam quo provident perspiciatis, voluptas
+            temporibus corrupti adipisci?
           </Typography.Text>
         </View>
       ))}
     </View>
   );
-};
+}

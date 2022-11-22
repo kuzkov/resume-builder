@@ -1,16 +1,16 @@
-import { Dayjs } from "dayjs";
+import { type Dayjs } from 'dayjs';
 export type EmploymentHistoryValues = Array<{
   jobTitle: string;
   employer: string;
   city: string;
   description: any;
   dateRange: {
-    startDate: Dayjs | null;
-    endDate: Dayjs | null;
+    startDate: Dayjs | undefined;
+    endDate: Dayjs | undefined;
     tillPresent: boolean;
   };
 }>;
 
-export const employmentHistoryName = "employmentHistory";
+export const employmentHistoryName = 'employmentHistory';
 
 export const employmentHistoryDefaultValues = [];

@@ -1,11 +1,11 @@
 import {
-  PersonalDetailsValues,
+  type PersonalDetailsValues,
   personalDetailsName,
   personalDetailsDefaultValues,
   employmentHistoryName,
-  EmploymentHistoryValues,
+  type EmploymentHistoryValues,
   employmentHistoryDefaultValues,
-} from "./subforms";
+} from './subforms';
 
 export type FormValues = {
   [personalDetailsName]: PersonalDetailsValues;

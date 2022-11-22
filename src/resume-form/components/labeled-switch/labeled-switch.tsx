@@ -1,15 +1,15 @@
-import { Switch as AntSwitch, SwitchProps } from "antd";
-import "./labeled-switch.less";
+import { Switch as AntSwitch, type SwitchProps } from 'antd';
+import './labeled-switch.less';
 
 export type LabeledSwitchProps = SwitchProps & {
   label?: string;
 };
 
-export const LabeledSwitch = ({ label, ...props }: LabeledSwitchProps) => {
+export function LabeledSwitch({ label, ...props }: LabeledSwitchProps) {
   return (
-    <div className="rb-labeled-switch">
+    <div className='rb-labeled-switch'>
       <AntSwitch {...props} />
-      {label && <span className="rb-labeled-switch__label">{label}</span>}
+      {label && <span className='rb-labeled-switch__label'>{label}</span>}
     </div>
   );
-};
+}

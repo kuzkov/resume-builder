@@ -1,2 +1,2 @@
-export * from "./personal-details/personal-details";
-export * from "./employment-history";
+export * from './personal-details/personal-details';
+export * from './employment-history';

@@ -1,30 +1,15 @@
-import {
-  BoldOutlined,
-  ItalicOutlined,
-  UnderlineOutlined,
-} from "@ant-design/icons";
-import { Button } from "antd";
-import {
-  useState,
-  useEffect,
-  useCallback,
-  MouseEventHandler,
-  ReactNode,
-} from "react";
-import { Editor, createEditor, BaseEditor } from "slate";
-import {
-  Slate,
-  Editable,
-  withReact,
-  RenderLeafProps,
-  useSlate,
-} from "slate-react";
-import "./text-editor.less";
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import { BoldOutlined, ItalicOutlined, UnderlineOutlined } from '@ant-design/icons';
+import { useState, useCallback, type MouseEventHandler, type ReactNode } from 'react';
+import { Editor, createEditor, type BaseEditor, type Descendant } from 'slate';
+import { Slate, Editable, withReact, useSlate, type ReactEditor, type RenderLeafProps } from 'slate-react';
+import { Button } from 'antd';
+import './text-editor.less';
 
-const defaultValue = [
+const defaultValue: Descendant[] = [
   {
-    type: "paragraph",
-    children: [{ text: "" }],
+    type: 'paragraph',
+    children: [{ text: '' }],
   },
 ];
 
@@ -33,51 +18,41 @@ export type TextEditorProps = {
   onChange?: (value: any) => void;
 };
 
-export const TextEditor = ({
-  initialValue = defaultValue,
-  onChange,
-}: TextEditorProps) => {
-  const [editor] = useState(() => withReact(createEditor()));
-  const renderLeaf = useCallback(
-    (props: RenderLeafProps) => <Leaf {...props} />,
-    []
-  );
+export function TextEditor({ initialValue = defaultValue, onChange }: TextEditorProps) {
+  const [editor, setEditor] = useState(() => withReact(createEditor()));
+  const renderLeaf = useCallback((props: RenderLeafProps) => <Leaf {...props} />, []);
 
   return (
-    <div className="rb-text-editor">
-      <Slate
-        editor={editor}
-        value={initialValue}
-        onChange={(value) => onChange?.(value)}
-      >
-        <div className="rb-text-editor__toolbar">
-          <MarkButton format="bold" icon={<BoldOutlined />} />
-          <MarkButton format="italic" icon={<ItalicOutlined />} />
-          <MarkButton format="underline" icon={<UnderlineOutlined />} />
+    <div className='rb-text-editor'>
+      <Slate editor={editor} value={initialValue} onChange={(value) => onChange?.(value)}>
+        <div className='rb-text-editor__toolbar'>
+          <MarkButton format='bold' icon={<BoldOutlined />} />
+          <MarkButton format='italic' icon={<ItalicOutlined />} />
+          <MarkButton format='underline' icon={<UnderlineOutlined />} />
         </div>
 
-        <Editable className="rb-text-editor__editable" {...{ renderLeaf }} />
+        <Editable className='rb-text-editor__editable' {...{ renderLeaf }} />
       </Slate>
     </div>
   );
-};
+}
 
-const toggleMark = (editor: BaseEditor, format: string) => {
+const toggleMark = (editor: BaseEditor & ReactEditor, format: string) => {
   const isActive = isActiveMark(editor, format);
 
-  if (!isActive) {
-    editor.addMark(format, true);
-  } else {
+  if (isActive) {
     editor.removeMark(format);
+  } else {
+    editor.addMark(format, true);
   }
 };
 
-const isActiveMark = (editor: BaseEditor, format: string) => {
+const isActiveMark = (editor: BaseEditor & ReactEditor, format: string) => {
   const marks = Editor.marks(editor) as any;
   return marks ? marks[format] === true : false;
 };
 
-const MarkButton = ({ format, icon }: { format: string; icon: ReactNode }) => {
+function MarkButton({ format, icon }: { format: string; icon: ReactNode }) {
   const editor = useSlate();
 
   const handleClick: MouseEventHandler = (event) => {
@@ -85,26 +60,21 @@ const MarkButton = ({ format, icon }: { format: string; icon: ReactNode }) => {
     toggleMark(editor, format);
   };
 
-  return (
-    <Button size="small" type="text" onMouseDown={handleClick} icon={icon} />
-  );
-};
+  return <Button size='small' type='text' icon={icon} onMouseDown={handleClick} />;
+}
 
-const Leaf = ({ children, leaf, attributes }: RenderLeafProps) => {
-  // @ts-ignore
+function Leaf({ children, leaf, attributes }: RenderLeafProps) {
   if (leaf.bold) {
     children = <strong>{children}</strong>;
   }
 
-  // @ts-ignore
   if (leaf.underline) {
     children = <u>{children}</u>;
   }
 
-  // @ts-ignore
   if (leaf.italic) {
     children = <i>{children}</i>;
   }
 
   return <span {...attributes}>{children}</span>;
-};
+}
