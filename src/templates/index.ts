@@ -1,1 +1,1 @@
-export * from "./standard-template";
+export * from './standard-template';

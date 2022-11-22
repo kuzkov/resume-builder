@@ -1,9 +1,9 @@
-import { Navigate, Route, Routes } from "react-router-dom";
-import { PdfViewer } from "./pdf-viewer/pdf-viewer";
-import { ResumeForm } from "./resume-form/resume-form";
-import { Grid } from "antd";
-import "./app.less";
-import { defaultValues, ResumeProvider } from "./resume-form";
+import { Navigate, Route, Routes } from 'react-router-dom';
+import { PdfViewer } from './pdf-viewer/pdf-viewer';
+import { ResumeForm } from './resume-form/resume-form';
+import { defaultValues, ResumeProvider } from './resume-form';
+import { Grid } from 'antd';
+import './app.less';
 
 const { useBreakpoint } = Grid;
 
@@ -12,33 +12,31 @@ function App() {
 
   return (
     <ResumeProvider initialValue={defaultValues}>
-      <div className="rb-app">
+      <div className='rb-app'>
         {lg ? (
           <Routes>
             <Route
-              path="app"
+              path='app'
               element={
                 <>
-                  <div className="rb-app__panel">
+                  <div className='rb-app__panel'>
                     <ResumeForm />
                   </div>
-                  <div className="rb-app__panel">
+                  <div className='rb-app__panel'>
                     <PdfViewer />
                   </div>
                 </>
               }
             />
-            <Route path="*" element={<Navigate to="app" replace />} />
+            <Route path='*' element={<Navigate replace to='app' />} />
           </Routes>
         ) : (
-          <>
-            <Routes>
-              <Route path="app/form" element={<ResumeForm />} />
-              <Route path="app/preview" element={<PdfViewer />} />
-              <Route path="app" element={<Navigate to="/app/form" replace />} />
-              <Route path="*" element={<Navigate to="app" replace />} />
-            </Routes>
-          </>
+          <Routes>
+            <Route path='app/form' element={<ResumeForm />} />
+            <Route path='app/preview' element={<PdfViewer />} />
+            <Route path='app' element={<Navigate replace to='/app/form' />} />
+            <Route path='*' element={<Navigate replace to='app' />} />
+          </Routes>
         )}
       </div>
     </ResumeProvider>
