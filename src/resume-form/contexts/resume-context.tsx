@@ -1,8 +1,8 @@
 import { createContext, type Dispatch, type PropsWithChildren, type SetStateAction, useContext, useState } from 'react';
 import { type FormValues } from '../default-form-values';
 
-const resumeContext = createContext<FormValues | undefined>(null);
-const resumeUpdateContext = createContext<Dispatch<SetStateAction<FormValues | undefined>> | undefined>(null);
+const resumeContext = createContext<FormValues | undefined>(undefined);
+const resumeUpdateContext = createContext<Dispatch<SetStateAction<FormValues | undefined>> | undefined>(undefined);
 
 export const useResume = () => {
   const resume = useContext(resumeContext);
@@ -18,7 +18,7 @@ export const useResumeUpdate = () => {
 
 export function ResumeProvider({
   children,
-  initialValue = null,
+  initialValue = undefined,
 }: PropsWithChildren<{ initialValue?: FormValues | undefined }>) {
   const [resume, setResume] = useState<FormValues | undefined>(initialValue);
 

@@ -36,7 +36,7 @@ export function Header() {
 
   return (
     <View style={styles.header}>
-      {Boolean(avatar) && <Image src={getBase64(avatar)} style={styles.avatar} />}
+      {Boolean(avatar) && <Image src={getBase64(avatar!)} style={styles.avatar} />}
       <View style={styles.personSection}>
         {(!firstName && !lastName) || (
           <Typography.Title>

@@ -23,8 +23,8 @@ export function EmploymentHistory() {
       city: '',
       description: undefined,
       dateRange: {
-        startDate: null,
-        endDate: null,
+        startDate: undefined,
+        endDate: undefined,
         tillPresent: false,
       },
     });
