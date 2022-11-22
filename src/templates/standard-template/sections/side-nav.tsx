@@ -33,7 +33,7 @@ export function SideNav() {
 
   return (
     <View>
-      {Boolean(country || city || email || phone || address || postalCode || dateOfBirth || nationality) && (
+      {!(country || city || email || phone || address || postalCode || dateOfBirth || nationality) || (
         <View style={styles.block}>
           <Typography.Title variant='h4' style={styles.heading}>
             Details
@@ -52,7 +52,17 @@ export function SideNav() {
             </View>
           )}
 
-          {Boolean(dateOfBirth) && (
+          {!address || (
+            <View style={styles.nestedBlock}>
+              <Typography.Title variant='h5' style={styles.nestedHeading}>
+                Address
+              </Typography.Title>
+              <Typography.Text style={styles.item}>{address}</Typography.Text>
+              <Typography.Text style={styles.item}>{postalCode}</Typography.Text>
+            </View>
+          )}
+
+          {!dateOfBirth || (
             <View style={styles.nestedBlock}>
               <Typography.Title variant='h5' style={styles.nestedHeading}>
                 Date of birth
@@ -61,7 +71,7 @@ export function SideNav() {
             </View>
           )}
 
-          {Boolean(nationality) && (
+          {!nationality || (
             <View>
               <Typography.Title variant='h5' style={styles.nestedHeading}>
                 Nationality
