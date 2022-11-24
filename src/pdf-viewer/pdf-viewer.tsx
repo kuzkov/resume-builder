@@ -1,4 +1,4 @@
-import { pdf } from '@react-pdf/renderer';
+import { pdf, PDFDownloadLink } from '@react-pdf/renderer';
 import { Document, Page } from 'react-pdf';
 import { useDebounce } from 'react-use';
 import { pdfjs } from 'react-pdf';
@@ -7,8 +7,9 @@ import { type SyntheticEvent, useState } from 'react';
 import './pdf-viewer.less';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import { StandardTemplate } from '../templates/standard-template';
-import { Pagination, type PaginationProps } from 'antd';
+import { Button, Pagination, type PaginationProps } from 'antd';
 import { useResume } from '../resume-form';
+import { DownloadOutlined, FileFilled, FileOutlined } from '@ant-design/icons';
 
 pdfjs.GlobalWorkerOptions.workerSrc = url;
 
@@ -59,6 +60,14 @@ export function PdfViewer(props: PdfViewerProps) {
         </div>
       </div>
       <div className='rb-viewer__bottom-bar'>
+        <PDFDownloadLink document={<StandardTemplate data={resume} />} fileName='resume.pdf'>
+          {({ loading, error }) => (
+            <Button loading={loading} disabled={Boolean(error)} type='primary' size='large'>
+              Download PDF
+              <DownloadOutlined />
+            </Button>
+          )}
+        </PDFDownloadLink>
         <Pagination
           hideOnSinglePage
           current={pageNumber}

@@ -39,7 +39,7 @@ export function SideNav() {
             Details
           </Typography.Title>
 
-          {!country || city || phone || email || (
+          {!(country || city || phone || email) || (
             <View style={styles.nestedBlock}>
               {!country || <Typography.Text style={styles.item}>{country}</Typography.Text>}
               {!city || <Typography.Text style={styles.item}>{city}</Typography.Text>}
