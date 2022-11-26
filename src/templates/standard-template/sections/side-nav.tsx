@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
   },
 });
 
+// eslint-disable-next-line complexity
 export function SideNav() {
   const resume = useResume();
 
