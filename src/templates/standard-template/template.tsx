@@ -31,6 +31,30 @@ export function StandardTemplate({ data }: { data: FormValues | undefined }) {
             <View style={styles.main}>
               <View style={styles.leftSide}>
                 <Main />
+                <Main />
+                <Main />
+                <Main />
+                <Main />
+                <Main />
+                <Main />
+                <Main />
+                <Main />
+                <Main />
+                <Main />
+                <Main />
+                <Main />
+                <Main />
+                <Main />
+                <Main />
+                <Main />
+                <Main />
+                <Main />
+                <Main />
+                <Main />
+                <Main />
+                <Main />
+                <Main />
+                <Main />
               </View>
               <View style={styles.rightSide}>
                 <SideNav />

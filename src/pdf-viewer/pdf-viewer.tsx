@@ -9,7 +9,7 @@ import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import { StandardTemplate } from '../templates/standard-template';
 import { Button, Pagination, type PaginationProps } from 'antd';
 import { useResume } from '../resume-form';
-import { DownloadOutlined, FileFilled, FileOutlined } from '@ant-design/icons';
+import { DownloadOutlined } from '@ant-design/icons';
 
 pdfjs.GlobalWorkerOptions.workerSrc = url;
 
@@ -59,6 +59,16 @@ export function PdfViewer(props: PdfViewerProps) {
           )}
         </div>
       </div>
+      <div className='rb-viewer__top-bar'>
+        <Pagination
+          hideOnSinglePage
+          current={pageNumber}
+          defaultCurrent={1}
+          total={numPages ?? 1}
+          pageSize={1}
+          onChange={handlePageChange}
+        />
+      </div>
       <div className='rb-viewer__bottom-bar'>
         <PDFDownloadLink document={<StandardTemplate data={resume} />} fileName='resume.pdf'>
           {({ loading, error }) => (
@@ -68,14 +78,6 @@ export function PdfViewer(props: PdfViewerProps) {
             </Button>
           )}
         </PDFDownloadLink>
-        <Pagination
-          hideOnSinglePage
-          current={pageNumber}
-          defaultCurrent={1}
-          total={numPages ?? 1}
-          pageSize={1}
-          onChange={handlePageChange}
-        />
       </div>
     </div>
   );
