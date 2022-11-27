@@ -2,7 +2,6 @@ import { CaretDownFilled, CaretUpFilled } from '@ant-design/icons';
 import { Col, Row, Typography } from 'antd';
 import { useState } from 'react';
 import { AvatarUploadField, RichTextField, TextField } from '../../controls';
-import { TextEditor } from '../../components';
 import { GhostButton } from '../../components/ghost-button/ghost-button';
 import './personal-details.less';
 

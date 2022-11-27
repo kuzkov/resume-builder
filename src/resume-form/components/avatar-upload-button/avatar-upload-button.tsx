@@ -22,14 +22,15 @@ const beforeUpload = (file: RcFile) => {
 };
 
 export type AvatarUploadButtonProps = {
+  value?: UploadFile;
   onChange?: (file?: File) => void;
 };
 
-export function AvatarUploadButton({ onChange }: AvatarUploadButtonProps) {
+export function AvatarUploadButton({ value, onChange }: AvatarUploadButtonProps) {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
   const [previewTitle, setPreviewTitle] = useState('');
-  const [fileList, setFileList] = useState<UploadFile[]>([]);
+  const [fileList, setFileList] = useState<UploadFile[]>(value ? [value] : []);
 
   const handleUpload: UploadProps['customRequest'] = ({ onSuccess }) => {
     setTimeout(() => {

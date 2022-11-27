@@ -5,16 +5,16 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { defaultValues, type FormValues } from './default-form-values';
 import { PersonalDetails, EmploymentHistory } from './subforms';
 import { useEffect } from 'react';
-import { useResumeUpdate } from './contexts/resume-context';
+import { useResume, useResumeUpdate } from './contexts/resume-context';
 import './resume-form.less';
 
 export function ResumeForm() {
+  const resume = useResume();
   const setResume = useResumeUpdate();
-  const methods = useForm<FormValues>({ defaultValues });
+  const methods = useForm<FormValues>({ defaultValues: resume ?? defaultValues });
 
   useEffect(() => {
     const subscription = methods.watch((formValues) => {
-      console.log('subscribe', formValues);
       setResume(formValues as FormValues);
     });
 

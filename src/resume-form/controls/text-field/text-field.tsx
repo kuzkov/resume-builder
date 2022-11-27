@@ -10,13 +10,13 @@ export type TextFieldProps = {
 
 export function TextField({ name, label, placeholder }: TextFieldProps) {
   return (
-    <Controller
-      name={name}
-      render={({ field: { value, ...field } }) => (
-        <Form.Item name={name} label={label}>
+    <Form.Item label={label}>
+      <Controller
+        name={name}
+        render={({ field: { value, ...field } }) => (
           <Input size='large' placeholder={placeholder} value={value as string} {...field} />
-        </Form.Item>
-      )}
-    />
+        )}
+      />
+    </Form.Item>
   );
 }
