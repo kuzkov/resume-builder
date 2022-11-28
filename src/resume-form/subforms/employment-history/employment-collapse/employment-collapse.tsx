@@ -46,7 +46,12 @@ export function EmploymentCollapse({ id, index }: EmploymentCollapseProps) {
                         {employment?.employer && employment?.jobTitle && ' at '}
                         {employment?.employer}
                       </Typography.Title>
-                      <Typography.Text type='secondary'>Aug 2020 - Aug 2021</Typography.Text>
+                      {employment.dateRange.startDate && (
+                        <Typography.Text type='secondary'>
+                          {employment.dateRange.startDate?.format('MMM YYYY')} -{' '}
+                          {employment.dateRange.endDate?.format('MMM YYYY') ?? 'present'}
+                        </Typography.Text>
+                      )}
                     </>
                   )}
                 </>
