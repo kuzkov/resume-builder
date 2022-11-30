@@ -10,7 +10,7 @@ export type StackProps = ReactPDF.ViewProps & {
   children?: ReactNode;
 };
 
-function Stack({ children, spacing, variant = 'vertical', ...props }: StackProps) {
+function Stack({ children, spacing, variant = 'vertical', style, ...props }: StackProps) {
   const mappedChildren = Children.map(children, (child, index) => {
     if (!isValidElement(child)) return null;
 
@@ -28,7 +28,18 @@ function Stack({ children, spacing, variant = 'vertical', ...props }: StackProps
     );
   });
 
-  return <View {...props}>{mappedChildren}</View>;
+  return (
+    <View
+      style={{
+        display: 'flex',
+        flexDirection: variant === 'horizontal' ? 'row' : 'column',
+        ...style,
+      }}
+      {...props}
+    >
+      {mappedChildren}
+    </View>
+  );
 }
 
 export default Stack;
