@@ -1,7 +1,7 @@
 import { Image, StyleSheet, View } from '@react-pdf/renderer';
 import { useResume } from '../../../resume-form';
 import { getBase64 } from '../../../utils/get-base64';
-import { Typography } from '../components';
+import { Stack, Typography } from '../components';
 
 const styles = StyleSheet.create({
   header: {
@@ -17,9 +17,6 @@ const styles = StyleSheet.create({
   personSection: {
     display: 'flex',
     justifyContent: 'center',
-  },
-  jobTitle: {
-    marginTop: 4,
   },
 });
 
@@ -38,12 +35,14 @@ export function Header() {
     <View style={styles.header}>
       {Boolean(avatar) && <Image src={getBase64(avatar!)} style={styles.avatar} />}
       <View style={styles.personSection}>
-        {(!firstName && !lastName) || (
-          <Typography.Title>
-            {firstName} {lastName}
-          </Typography.Title>
-        )}
-        {!wantedJobTitle || <Typography.Text style={styles.jobTitle}>{wantedJobTitle}</Typography.Text>}
+        <Stack spacing={4}>
+          {(!firstName && !lastName) || (
+            <Typography.Title>
+              {firstName} {lastName}
+            </Typography.Title>
+          )}
+          {!wantedJobTitle || <Typography.Text>{wantedJobTitle}</Typography.Text>}
+        </Stack>
       </View>
     </View>
   );
