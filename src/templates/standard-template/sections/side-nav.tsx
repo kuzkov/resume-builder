@@ -1,6 +1,6 @@
 import { View, Link, StyleSheet } from '@react-pdf/renderer';
 import { useResume } from '../../../resume-form';
-import { Typography } from '../components';
+import { Stack, Typography } from '../components';
 
 const styles = StyleSheet.create({
   heading: {
@@ -35,52 +35,46 @@ export function SideNav() {
   return (
     <View>
       {!(country || city || email || phone || address || postalCode || dateOfBirth || nationality) || (
-        <View style={styles.block}>
-          <Typography.Title variant='h4' style={styles.heading}>
-            Details
-          </Typography.Title>
+        <Stack spacing={8}>
+          <Typography.Title variant='h4'>Details</Typography.Title>
 
-          {!(country || city || phone || email) || (
-            <View style={styles.nestedBlock}>
-              {!country || <Typography.Text style={styles.item}>{country}</Typography.Text>}
-              {!city || <Typography.Text style={styles.item}>{city}</Typography.Text>}
-              {!phone || <Typography.Text style={styles.item}>{phone}</Typography.Text>}
-              {!email || (
-                <Link style={styles.item} src={`mailto:${email}`}>
-                  <Typography.Link>{email}</Typography.Link>
-                </Link>
-              )}
-            </View>
-          )}
+          <Stack spacing={16}>
+            {!(country || city || phone || email) || (
+              <Stack spacing={6}>
+                {!country || <Typography.Text>{country}</Typography.Text>}
+                {!city || <Typography.Text>{city}</Typography.Text>}
+                {!phone || <Typography.Text>{phone}</Typography.Text>}
+                {!email || (
+                  <Link src={`mailto:${email}`}>
+                    <Typography.Link>{email}</Typography.Link>
+                  </Link>
+                )}
+              </Stack>
+            )}
 
-          {!address || (
-            <View style={styles.nestedBlock}>
-              <Typography.Title variant='h5' style={styles.nestedHeading}>
-                Address
-              </Typography.Title>
-              <Typography.Text style={styles.item}>{address}</Typography.Text>
-              <Typography.Text style={styles.item}>{postalCode}</Typography.Text>
-            </View>
-          )}
+            {!address || (
+              <Stack spacing={6}>
+                <Typography.Title variant='h5'>Address</Typography.Title>
+                <Typography.Text>{address}</Typography.Text>
+                <Typography.Text>{postalCode}</Typography.Text>
+              </Stack>
+            )}
 
-          {!dateOfBirth || (
-            <View style={styles.nestedBlock}>
-              <Typography.Title variant='h5' style={styles.nestedHeading}>
-                Date of birth
-              </Typography.Title>
-              <Typography.Text style={styles.item}>{dateOfBirth}</Typography.Text>
-            </View>
-          )}
+            {!dateOfBirth || (
+              <Stack spacing={6}>
+                <Typography.Title variant='h5'>Date of birth</Typography.Title>
+                <Typography.Text>{dateOfBirth}</Typography.Text>
+              </Stack>
+            )}
 
-          {!nationality || (
-            <View>
-              <Typography.Title variant='h5' style={styles.nestedHeading}>
-                Nationality
-              </Typography.Title>
-              <Typography.Text style={styles.item}>{nationality}</Typography.Text>
-            </View>
-          )}
-        </View>
+            {!nationality || (
+              <Stack spacing={6}>
+                <Typography.Title variant='h5'>Nationality</Typography.Title>
+                <Typography.Text>{nationality}</Typography.Text>
+              </Stack>
+            )}
+          </Stack>
+        </Stack>
       )}
     </View>
   );
